@@ -10,7 +10,7 @@ import com.moraes.usecase.WorstProducerUseCase;
 
 
 @RestController
-//@RequestMapping("/piorfilme")
+@RequestMapping("/piorfilme")
 public class PiorFilme {
 
 	@Autowired
