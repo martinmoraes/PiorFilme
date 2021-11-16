@@ -1,4 +1,11 @@
 C:\Users\Usuário\eclipse-workspace\PiorFilme\src\main\java\com\moraes\interfaces\MovieRepository.java
+C:\Users\Usuário\eclipse-workspace\PiorFilme\src\main\java\com\moraes\service\worstProducer\WorstProducer.java
 C:\Users\Usuário\eclipse-workspace\PiorFilme\src\main\java\com\moraes\controller\PiorFilme.java
-C:\Users\Usuário\eclipse-workspace\PiorFilme\src\main\java\com\moraes\entity\Movie.java
+C:\Users\Usuário\eclipse-workspace\PiorFilme\src\main\java\com\moraes\service\MovieImporter.java
+C:\Users\Usuário\eclipse-workspace\PiorFilme\src\main\java\com\moraes\usecase\MovieImportUseCase.java
+C:\Users\Usuário\eclipse-workspace\PiorFilme\src\main\java\com\moraes\service\worstProducer\MinMaxInterval.java
+C:\Users\Usuário\eclipse-workspace\PiorFilme\src\main\java\com\moraes\presenter\MinMaxIntervalToJson.java
+C:\Users\Usuário\eclipse-workspace\PiorFilme\src\main\java\com\moraes\model\Movie.java
 C:\Users\Usuário\eclipse-workspace\PiorFilme\src\main\java\com\moraes\PiorFilmeApplication.java
+C:\Users\Usuário\eclipse-workspace\PiorFilme\src\main\java\com\moraes\service\worstProducer\Worst.java
+C:\Users\Usuário\eclipse-workspace\PiorFilme\src\main\java\com\moraes\usecase\WorstProducerUseCase.java

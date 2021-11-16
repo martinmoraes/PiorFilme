@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.moraes.service.MovieImporterTest
+-------------------------------------------------------------------------------
+Tests run: 3, Failures: 0, Errors: 0, Skipped: 1, Time elapsed: 0.385 s - in com.moraes.service.MovieImporterTest

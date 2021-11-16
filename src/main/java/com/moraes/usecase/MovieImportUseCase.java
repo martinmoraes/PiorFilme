@@ -1,5 +1,7 @@
 package com.moraes.usecase;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -17,17 +19,14 @@ public class MovieImportUseCase {
 	}
 
 
-	public boolean execute(){
-		String separator = System.getProperty("file.separator"); 
-		String URI = System.getProperty("user.dir") + separator +"resources";
+	public Map<String, Integer> execute(String directory){
 		
 		try {
-			movieImporter.importAllFilesCSV(URI);
-//			new MovieImporter().importAllFilesCSV(URI);
-			return true;
+			return movieImporter.importAllFilesCSV(directory);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
-			return false;
+			return null;
 		}
 		
 	}

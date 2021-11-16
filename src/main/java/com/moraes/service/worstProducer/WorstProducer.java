@@ -6,10 +6,10 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.annotation.RequestScope;
 
 import com.moraes.model.Movie;
 
-@Component
 public class WorstProducer {
 	private Map<String, Movie> observ = new HashMap<String, Movie>();
 	private List<Worst> worstsMax = new ArrayList<Worst>();

@@ -22,6 +22,7 @@ public class PiorFilme {
 	@RequestMapping(value = "/piorfilme", method = RequestMethod.GET, produces="application/json")
 	public ResponseEntity<String> obterPior() {
 		MinMaxInterval result = worstProducerUseCase.execute();
+//		MinMaxInterval result = new WorstProducerUseCase().execute();
 		String resultJson = MinMaxIntervalToJson.translate(result);
 		return ResponseEntity.ok(resultJson);
 	}

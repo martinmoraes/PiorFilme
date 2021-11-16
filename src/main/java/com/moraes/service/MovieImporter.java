@@ -35,7 +35,7 @@ public class MovieImporter {
 			String[] lineInArray;
 			while ((lineInArray = reader.readNext()) != null) {
 				Movie movie = new Movie(Integer.parseInt(lineInArray[0]), lineInArray[1], lineInArray[2],
-						lineInArray[3]);
+						lineInArray[3], lineInArray[4]);
 				movies.add(movie);
 				if (movies.size() == MAX) {
 					movieRepository.saveAll(movies);

@@ -24,14 +24,6 @@ public class Movie {
 		
 	}
 
-	public Movie(int year, String title, String studios, String producers) {
-		super();
-		this.year = year;
-		this.title = title;
-		this.studios = studios;
-		this.producers = producers;
-	}
-	
 	public Movie(int year, String title, String studios, String producers, String winner) {
 		super();
 		this.year = year;

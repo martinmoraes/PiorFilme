@@ -11,10 +11,9 @@ import com.moraes.model.Movie;
 
 public interface MovieRepository extends JpaRepository<Movie, Long> {
 
-	List<Movie> findByOrderByYearAsc();
+	List<Movie> findAllByWinnerOrderByYearAsc(String winner);
 
 	Page<Movie> findByOrderByYearAsc(Pageable pageable);
 
-	Page<Movie> findAll(Pageable pageable);
 
 }
