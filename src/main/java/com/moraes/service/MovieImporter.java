@@ -21,6 +21,7 @@ import com.opencsv.exceptions.CsvValidationException;
 @Component
 public class MovieImporter {
 	private MovieRepository movieRepository;
+	private final int MAX = 50;
 
 	public MovieImporter(MovieRepository movieRepository) {
 		super();
@@ -28,7 +29,6 @@ public class MovieImporter {
 	}
 
 	public int importFileCSV(File URI) throws IOException, CsvValidationException {
-		final int MAX = 50;
 		List<Movie> movies = new ArrayList<Movie>();
 		int total = 0;
 		try (CSVReader reader = getCSVReader(URI)) {
@@ -70,11 +70,10 @@ public class MovieImporter {
 		File f = new File(URI);
 		return f.listFiles();
 	}
-	
+
 	private CSVReader getCSVReader(File URI) throws IOException, CsvValidationException {
 		CSVParser csvParser = new CSVParserBuilder().withSeparator(';').build();
 		return new CSVReaderBuilder(new FileReader(URI)).withCSVParser(csvParser).withSkipLines(1).build();
 	}
-	
-	
+
 }
