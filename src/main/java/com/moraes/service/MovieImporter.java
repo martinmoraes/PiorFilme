@@ -3,11 +3,13 @@ package com.moraes.service;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import com.moraes.interfaces.MovieRepository;
@@ -18,17 +20,16 @@ import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
 import com.opencsv.exceptions.CsvValidationException;
 
-@Service
+@Component
 public class MovieImporter {
-	@Autowired
 	private MovieRepository movieRepository;
 
-	public File[] fetchAllFiles(String URI) throws IOException {
-		File f = new File(URI);
-		return  f.listFiles();
+	public MovieImporter(MovieRepository movieRepository) {
+		super();
+		this.movieRepository = movieRepository;
 	}
 
-	public int importFileCSV(Path URI) throws IOException, CsvValidationException {
+	public int importFileCSV(File URI) throws IOException, CsvValidationException {
 		final int MAX = 50;
 		List<Movie> movies = new ArrayList<Movie>();
 		int total = 0;
@@ -45,7 +46,9 @@ public class MovieImporter {
 				}
 			}
 			total += movies.size();
-			movieRepository.saveAll(movies);
+			if (!movies.isEmpty()) {
+				movieRepository.saveAll(movies);
+			}
 		}
 		return total;
 	}
@@ -54,23 +57,26 @@ public class MovieImporter {
 		int files = 0;
 		int records = 0;
 		Map<String, Integer> recordsAndFiles = new HashMap<String, Integer>();
-		Stream<Path> pathAllFiles = this.fetchAllFiles(URI);
-		System.out.println("pathAllFiles"+ pathAllFiles.count());
-		Path[] arrayPathAllFiles =  pathAllFiles.toArray();
-		System.out.println("arrayPathAllFiles"+ arrayPathAllFiles);
-		for (Path path : arrayPathAllFiles) {
-			records += this.importFileCSV(path);
+		File[] allFiles = this.fetchAllFiles(URI);
+		for (File file : allFiles) {
+			records += this.importFileCSV(file);
 			files++;
 		}
 
 		recordsAndFiles.put("files", files);
 		recordsAndFiles.put("records", records);
-		System.out.println(recordsAndFiles);
 		return recordsAndFiles;
 	}
 
-	private CSVReader getCSVReader(Path URI) throws IOException, CsvValidationException {
-		CSVParser csvParser = new CSVParserBuilder().withSeparator(';').build();
-		return new CSVReaderBuilder(new FileReader(URI.toFile())).withCSVParser(csvParser).withSkipLines(1).build();
+	public File[] fetchAllFiles(String URI) throws IOException {
+		File f = new File(URI);
+		return f.listFiles();
 	}
+	
+	private CSVReader getCSVReader(File URI) throws IOException, CsvValidationException {
+		CSVParser csvParser = new CSVParserBuilder().withSeparator(';').build();
+		return new CSVReaderBuilder(new FileReader(URI)).withCSVParser(csvParser).withSkipLines(1).build();
+	}
+	
+	
 }

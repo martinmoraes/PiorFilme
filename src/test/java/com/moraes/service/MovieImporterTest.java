@@ -31,8 +31,8 @@ public class MovieImporterTest {
 	
 	@Test
 	public void whenReadingEachLine_mustContainMoreThanTenLines() throws IOException, CsvValidationException {
-			Stream<Path> pathAllFiles = movieImporter.fetchAllFiles(URI);
-			Path firstFile = (Path) pathAllFiles.toArray()[0];
+			File[] allFiles = movieImporter.fetchAllFiles(URI);
+			File firstFile = allFiles[0];
 			int received = movieImporter.importFileCSV(firstFile);
 			assertThat(received).isGreaterThan(100);
 	}
@@ -40,7 +40,6 @@ public class MovieImporterTest {
 	@Test
 	public void	whenYouHaveMoreThanOneFile_mustImportAll() throws IOException, CsvValidationException {
 			Map<String, Integer> received = movieImporter.importAllFilesCSV(URI);
-			System.out.println(received.get("files")+" "+received.get("records"));
 			assertThat(received.get("files")).isGreaterThan(1);
 			assertThat(received.get("records")).isGreaterThan(200);
 	}
