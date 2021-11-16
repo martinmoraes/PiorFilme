@@ -23,40 +23,25 @@ public class WorstProducerUseCase {
 	private MovieRepository movieRepository;
 
 	public MinMaxInterval execute() {
-		MinMaxInterval minMaxInterval = this.fetchMinMaxIntervalOneQuery();
-//		MinMaxInterval minMaxInterval = this.fetchMinMaxIntervalPageable();
-		return minMaxInterval;
-	}
-
-	private MinMaxInterval fetchMinMaxIntervalOneQuery() {
-		WorstProducer worstProducer = new WorstProducer();
-		List<Movie> movies = movieRepository.findAllByWinnerOrderByYearAsc("yes");
-		MinMaxInterval minMaxInterval = worstProducer.fetchWorstMaxMin(movies);
-		return minMaxInterval;
-	}
-	
-	private MinMaxInterval fetchMinMaxIntervalPageable() {
 		int page = 0;
-		int length = 50;
+		int length = 10;
 		MinMaxInterval minMaxInterval = null;
 		WorstProducer worstProducer = new WorstProducer();
 		List<Movie> movies = this.getMovieRecords(page, length);
 		while (movies.size() > 0) {
 			minMaxInterval = worstProducer.fetchWorstMaxMin(movies);
+			page++;
 			movies = this.getMovieRecords(page, length);
-			page += length;
-			System.out.println(page +" "+length);
 		}
+
 		return minMaxInterval;
 	}
 
+
 	private List<Movie> getMovieRecords(int page, int length) {
 		Pageable pageable = PageRequest.of(page, length, Sort.by("Year").ascending());
-		Page<Movie> moviesPage = movieRepository.findAll(pageable);
-//		Pageable orderByYearAsc = PageRequest.of(page, length);
-//		Page<Movie> moviesPage = movieRepository.findByOrderByYearAsc(orderByYearAsc);
+		Page<Movie> moviesPage = movieRepository.findAllByWinnerOrderByYearAsc("yes", pageable);
 		return moviesPage.getContent();
 	}
-
 
 }

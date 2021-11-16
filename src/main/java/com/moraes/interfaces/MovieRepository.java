@@ -13,7 +13,8 @@ public interface MovieRepository extends JpaRepository<Movie, Long> {
 
 	List<Movie> findAllByWinnerOrderByYearAsc(String winner);
 
-	Page<Movie> findByOrderByYearAsc(Pageable pageable);
+	Page<Movie> findAllByWinnerOrderByYearAsc(String winner, Pageable pageable);
 
+	Page<Movie> findByOrderByYearAsc(Pageable pageable);
 
 }
