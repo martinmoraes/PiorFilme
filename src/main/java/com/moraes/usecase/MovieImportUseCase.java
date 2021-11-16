@@ -9,26 +9,24 @@ import com.moraes.service.MovieImporter;
 
 @Component
 public class MovieImportUseCase {
-	
+
 	private MovieImporter movieImporter;
-	
+
 	@Autowired
 	public MovieImportUseCase(MovieImporter movieImporter) {
 		super();
 		this.movieImporter = movieImporter;
 	}
 
+	public Map<String, Integer> execute(String directory) {
 
-	public Map<String, Integer> execute(String directory){
-		
 		try {
 			return movieImporter.importAllFilesCSV(directory);
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
 		}
-		
+
 	}
 
 }

@@ -6,9 +6,7 @@ import com.google.gson.Gson;
 import com.moraes.service.worstProducer.MinMaxInterval;
 
 @Component
-public class MinMaxIntervalToJson {
-//	@Autowired
-//	private WorstProducer worstProducer;
+public class MinMaxIntervalToJsonPresenter {
 
 	public static String translate(MinMaxInterval minMaxInterval) {
 		Gson toJson = new Gson();

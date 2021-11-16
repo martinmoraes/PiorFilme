@@ -21,15 +21,20 @@ public class WorstProducerUseCase {
 
 	@Autowired
 	private MovieRepository movieRepository;
-	private WorstProducer worstProducer = null ;
 
 	public MinMaxInterval execute() {
-		worstProducer = new WorstProducer();
 		MinMaxInterval minMaxInterval = this.fetchMinMaxIntervalOneQuery();
 //		MinMaxInterval minMaxInterval = this.fetchMinMaxIntervalPageable();
 		return minMaxInterval;
 	}
 
+	private MinMaxInterval fetchMinMaxIntervalOneQuery() {
+		WorstProducer worstProducer = new WorstProducer();
+		List<Movie> movies = movieRepository.findAllByWinnerOrderByYearAsc("yes");
+		MinMaxInterval minMaxInterval = worstProducer.fetchWorstMaxMin(movies);
+		return minMaxInterval;
+	}
+	
 	private MinMaxInterval fetchMinMaxIntervalPageable() {
 		int page = 0;
 		int length = 50;
@@ -53,9 +58,5 @@ public class WorstProducerUseCase {
 		return moviesPage.getContent();
 	}
 
-	private MinMaxInterval fetchMinMaxIntervalOneQuery() {
-		List<Movie> movies = movieRepository.findAllByWinnerOrderByYearAsc("yes");
-		MinMaxInterval minMaxInterval = worstProducer.fetchWorstMaxMin(movies);
-		return minMaxInterval;
-	}
+
 }

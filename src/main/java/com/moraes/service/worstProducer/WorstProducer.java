@@ -5,9 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.stereotype.Component;
-import org.springframework.web.context.annotation.RequestScope;
-
 import com.moraes.model.Movie;
 
 public class WorstProducer {
@@ -75,15 +72,8 @@ public class WorstProducer {
 	}
 
 	public Worst creatWorst(int interval, Movie movie, Movie observMovie) {
-		Worst worst = new Worst();
-		worst.setProducer(movie.getProducers());
-		worst.setInterval(interval);
-		worst.setPreviousWin(observMovie.getYear());
-		worst.setFollowingWin(movie.getYear());
+		Worst worst = new Worst(movie.getProducers(), interval, observMovie.getYear(), movie.getYear());
 		return worst;
 	}
 
 }
-
-
-
