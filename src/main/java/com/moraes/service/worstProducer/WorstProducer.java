@@ -1,4 +1,4 @@
-package com.moraes.service;
+package com.moraes.service.worstProducer;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -7,7 +7,6 @@ import java.util.Map;
 
 import org.springframework.stereotype.Component;
 
-import com.google.gson.Gson;
 import com.moraes.model.Movie;
 
 @Component
@@ -16,29 +15,18 @@ public class WorstProducer {
 	private List<Worst> worstsMax = new ArrayList<Worst>();
 	private List<Worst> worstsMin = new ArrayList<Worst>();
 
-	public String fetchWorstMaxMin(List<Movie> movies) {
-
+	public MinMaxInterval fetchWorstMaxMin(List<Movie> movies) {
 		Movie observMovie = null;
 
 		for (Movie movie : movies) {
 			observMovie = observ.get(movie.getProducers());
 			if (observMovie != null) {
-				Worst worstMax = this.defineMaxInterval(movie, observMovie);
-				Worst worstMin = this.defineMinInterval(movie, observMovie);
+				this.defineMaxInterval(movie, observMovie);
+				this.defineMinInterval(movie, observMovie);
 			}
 			observ.put(movie.getProducers(), movie);
 		}
-
-		return this.getJson();
-	}
-
-	private String getJson() {
-		Map<String, List<Worst>> originToJson = new HashMap<String, List<Worst>>();
-		originToJson.put("max", worstsMax);
-		originToJson.put("min", worstsMin);
-		Gson gson = new Gson();
-		return gson.toJson(originToJson);
-
+		return new MinMaxInterval(worstsMin, worstsMax);
 	}
 
 	private Worst defineMinInterval(Movie movie, Movie observMovie) {
@@ -50,11 +38,11 @@ public class WorstProducer {
 		}
 
 		Worst worstMin = worstsMin.get(0);
-		if (worstMin.interval < interval) {
+		if (worstMin.getInterval() < interval) {
 			return null;
 		}
 
-		if (worstMin.interval > interval) {
+		if (worstMin.getInterval() > interval) {
 			worstsMin.clear();
 		}
 
@@ -73,11 +61,11 @@ public class WorstProducer {
 		}
 
 		Worst worstMax = worstsMax.get(0);
-		if (worstMax.interval > interval) {
+		if (worstMax.getInterval() > interval) {
 			return null;
 		}
 
-		if (worstMax.interval < interval) {
+		if (worstMax.getInterval() < interval) {
 			worstsMax.clear();
 		}
 
@@ -88,24 +76,14 @@ public class WorstProducer {
 
 	public Worst creatWorst(int interval, Movie movie, Movie observMovie) {
 		Worst worst = new Worst();
-		worst.producer = movie.getProducers();
-		worst.interval = interval;
-		worst.previousWin = observMovie.getYear();
-		worst.followingWin = movie.getYear();
+		worst.setProducer(movie.getProducers());
+		worst.setInterval(interval);
+		worst.setPreviousWin(observMovie.getYear());
+		worst.setFollowingWin(movie.getYear());
 		return worst;
 	}
 
 }
 
-class Worst {
-	public String producer;
-	public int interval;
-	public int previousWin;
-	public int followingWin;
 
-	@Override
-	public String toString() {
-		return "Worst [producer=" + producer + ", interval=" + interval + ", previousWin=" + previousWin
-				+ ", followingWin=" + followingWin + "]";
-	}
-}
+
