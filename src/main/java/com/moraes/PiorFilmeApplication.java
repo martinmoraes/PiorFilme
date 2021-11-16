@@ -3,10 +3,12 @@ package com.moraes;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
 
 import com.moraes.usecase.MovieImportUseCase;
 
 @SpringBootApplication
+//@ComponentScan(basePackages = {"com.moraes"})
 public class PiorFilmeApplication {
 //	@Autowired
 //	MovieImportUseCase movieImportUseCase;
