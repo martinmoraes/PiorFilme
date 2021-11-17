@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: com.moraes.service.worstProducer.WorstProducerTest
--------------------------------------------------------------------------------
-Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.5 s - in com.moraes.service.worstProducer.WorstProducerTest
