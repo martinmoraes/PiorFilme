@@ -10,6 +10,7 @@
 * Colocar arquivos CSV no diretório `PiorFilme/Resources/`. Múltiplos arquivos são suportados.
 * `cd PiorFilme`
 * `mvn spring-boot:run`
+* URL:`http://localhost:8080/piorfilme`
 
 ## Teste
 * `cd PiorFilme`
