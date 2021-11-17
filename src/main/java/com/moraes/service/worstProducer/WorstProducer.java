@@ -28,8 +28,9 @@ public class WorstProducer {
 
 	private Worst defineMinInterval(Movie movie, Movie observMovie) {
 		int interval = movie.getYear() - observMovie.getYear();
+		Worst worst = creatWorst(interval, movie, observMovie);
+		
 		if (worstsMin.isEmpty()) {
-			Worst worst = creatWorst(interval, movie, observMovie);
 			worstsMin.add(worst);
 			return worst;
 		}
@@ -43,16 +44,15 @@ public class WorstProducer {
 			worstsMin.clear();
 		}
 
-		Worst worst = creatWorst(interval, movie, observMovie);
 		worstsMin.add(worst);
 		return worst;
-
 	}
 
 	public Worst defineMaxInterval(Movie movie, Movie observMovie) {
 		int interval = movie.getYear() - observMovie.getYear();
+		Worst worst = creatWorst(interval, movie, observMovie);
+		
 		if (worstsMax.isEmpty()) {
-			Worst worst = creatWorst(interval, movie, observMovie);
 			worstsMax.add(worst);
 			return worst;
 		}
@@ -66,7 +66,6 @@ public class WorstProducer {
 			worstsMax.clear();
 		}
 
-		Worst worst = creatWorst(interval, movie, observMovie);
 		worstsMax.add(worst);
 		return worst;
 	}
