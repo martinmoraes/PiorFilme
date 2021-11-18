@@ -40,7 +40,8 @@ public class WorstProducerUseCase {
 
 	private List<Movie> getMovieRecords(int page, int length) {
 		Pageable pageable = PageRequest.of(page, length, Sort.by("Year").ascending());
-		Page<Movie> moviesPage = movieRepository.findAllByWinnerOrderByYearAsc("yes", pageable);
+//		Page<Movie> moviesPage = movieRepository.findAllByWinnerOrderByYearAsc("yes", pageable);
+		Page<Movie> moviesPage = movieRepository.findByOrderByYearAsc(pageable);
 		return moviesPage.getContent();
 	}
 
